@@ -1,0 +1,20 @@
+{
+  "name": "RestBeer",
+  "description" : "Tests using Respect!",
+  "authors": [
+    {
+      "name": "Ivan Rosolen",
+      "email": "ivan@rosolen.net"
+    },
+    {
+      "name": "Felix Costa",
+      "email": "fx3costa@gmail.com"
+    },
+  ],
+  "require": {
+    "respect/rest": "0.5.x",
+    "respect/relational": "0.5.x",
+    "respect/config": "0.3.x",
+    "respect/validation": "0.4.x"
+  }
+}
