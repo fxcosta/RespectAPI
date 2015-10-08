@@ -9,7 +9,7 @@
     {
       "name": "Felix Costa",
       "email": "fx3costa@gmail.com"
-    },
+    }
   ],
   "require": {
     "respect/rest": "0.5.x",
