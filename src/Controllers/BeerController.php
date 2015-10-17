@@ -1,40 +1,41 @@
 <?php
 namespace Beer\Controllers;
 
-use PDO;
-use Respect\Config\Container;
-use Respect\Relational\Mapper;
+use Beer\Repositories\BeerRepository;
 use Respect\Rest\Routable;
 
 class BeerController implements Routable
 {
     /**
-     * @var Mapper
+     * @var BeerRepository
      */
-    protected $mapper;
+    public $repository;
 
     /**
      * TODO usar dependency injection aqui!
      */
     public function __construct()
     {
-        $config = new Container("config/config.ini");
-        $this->mapper = new Mapper(new PDO($config->dsn, $config->user, $config->pass));
+        $this->repository = new BeerRepository();
     }
 
     public function get($id = null)
     {
         if(is_null($id)) {
-            return 'sem id definido';
+            return $this->repository->fetchAll();
         }
 
-        $res = $this->mapper->testing(['id' => $id])->fetchAll();
-        return json_encode($res);
+        return $this->repository->fetch($id);
     }
 
     public function post()
     {
-        var_dump($_POST);
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST)) {
+            isset($_POST['name']) ? $name = $_POST['name'] : $name = '';
+            return $this->repository->insert([$name]);
+        }
+
+        throw new \Exception('Houve algo errado com a requisição');
     }
 
     public function delete($beer)
